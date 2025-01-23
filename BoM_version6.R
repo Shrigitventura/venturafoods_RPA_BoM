@@ -335,6 +335,7 @@ type_convert(jde_bom_us) -> jde_bom_us
 
 colnames(jde_bom_us)[13] <- "Quantity_w_Scrap"
 
+#Following pipeline below is for when Unit Cost is empty then it replaces value in specified columns with values as listed
 jde_bom_us %>%
   mutate(
     needs_correction = is.na(Unit_Cost),
@@ -395,12 +396,13 @@ rbind(jde_bom_us, jde_bom_canada) -> jde_bom
 
 
 
-# parent count
+# parent count by grouping we are counting for how many parents are there for each distinct component_ref(Component + Location), so at Loc+component level
 jde_bom %>% 
   dplyr::count(comp_ref, Parent_Item_Number) %>% 
   dplyr::group_by(comp_ref) %>%
   dplyr::summarize(parent_count_1 = n_distinct(Parent_Item_Number)) -> parent_count_1
 
+# parent count by grouping we are counting for how many parents are there for each distinct Component so at component level only
 jde_bom %>% 
   dplyr::count(Component, Parent_Item_Number) %>% 
   dplyr::group_by(Component) %>%
