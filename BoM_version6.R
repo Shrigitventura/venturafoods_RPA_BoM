@@ -89,6 +89,7 @@ inventory_model_data %>%
 
 # (Path revision needed) IOM MicroStrategy ----
 # https://edgeanalytics.venturafoods.com/MicroStrategyLibrary/app/DF007F1C11E9B3099BB30080EF7513D2/07915A52DE47AA1CDB4AB082191E4EBA/K271--K264
+#This data would be in complete SKU list and can be read from there
 IOM_micro <- read_excel("S:/Supply Chain Projects/Data Source (SCE)/Report ingredients/Stan/01212025/IOM Data Extract.xlsx")
 
 IOM_micro[-1, ] -> IOM_micro
